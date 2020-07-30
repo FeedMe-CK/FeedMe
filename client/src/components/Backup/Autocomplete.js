@@ -6,9 +6,7 @@ export default class Autocomplete extends Component {
     place_id: this.props.place_id,
   };
 
-  handleChange = event => {
-    console.log('Got here');
-  };
+  handleChange = event => {};
 
   render() {
     return (

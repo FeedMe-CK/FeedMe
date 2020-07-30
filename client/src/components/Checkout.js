@@ -1,8 +1,8 @@
-import React from "react";
-import { Redirect, Link } from "react-router-dom";
-import { getCartData, placeOrder } from "../services/repository";
-import SearchLocationInput from "./SearchLocationInput";
-import { Form, Button, Alert } from "react-bootstrap";
+import React from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import { getCartData, placeOrder } from '../services/repository';
+import SearchLocationInput from './SearchLocationInput';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 export default class Checkout extends React.Component {
   constructor(props) {
@@ -35,15 +35,19 @@ export default class Checkout extends React.Component {
         this.props.history.push("/success");
         localStorage.removeItem("cart");
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }
 
+  updateAddress = (deliveryAddress, place_id) => {
+    this.setState({ deliveryAddress, place_id });
+  };
+
   componentDidMount() {
-    let cart = localStorage.getItem("cart");
+    let cart = localStorage.getItem('cart');
     if (!cart) return;
-    getCartData(cart).then((cartItem) => {
+    getCartData(cart).then(cartItem => {
       const parsedCart = JSON.parse(cart);
-      const newCart = cartItem.map((el) => ({
+      const newCart = cartItem.map(el => ({
         ...el,
         qty: parsedCart[el.itemNo],
       }));
@@ -57,8 +61,8 @@ export default class Checkout extends React.Component {
     if (!this.props.user) return <Redirect to="/login" />;
     const { menu, total } = this.state;
     return (
-      <div className=" container">
-        <h3 className="card-title">Checkout</h3>
+      <div className=' container'>
+        <h3 className='card-title'>Checkout</h3>
         <hr />
         {menu.map((menuItem, index) => (
           <div key={index}>
@@ -82,13 +86,12 @@ export default class Checkout extends React.Component {
             <hr />
           </div>
         ) : (
-          ""
+          ''
         )}
         {menu.length ? (
           <div>
             <h4>
-              The delivery address is {this.props.user.address} , if you need to
-              change the address , please select the address below:
+              The delivery address is {this.props.user.address} , if you need to change the address , please select the address below:
             </h4>
             {
               <SearchLocationInput
@@ -100,29 +103,26 @@ export default class Checkout extends React.Component {
             }
           </div>
         ) : (
-          ""
+          ''
         )}
 
-        {!menu.length ? (
-          <h3 className="text-warning">No item on the cart</h3>
-        ) : (
-          ""
-        )}
+        {!menu.length ? <h3 className='text-warning'>No item on the cart</h3> : ''}
         {menu.length ? (
-          <button
-            className="btn btn-success float-right"
-            onClick={() => this.checkout()}
-          >
-            Confirm
-          </button>
+          <div>
+            <button className='btn btn-success float-right' onClick={() => this.checkout()}>
+              Confirm
+            </button>
+          </div>
         ) : (
-          ""
+          ''
         )}
-        <Link to="/cart">
-          <button
-            className="btn btn-danger float-right"
-            style={{ marginRight: "10px" }}
-          >
+        <Link to='/menu'>
+          <button className='btn btn-success float-right' style={{ marginRight: '10px' }}>
+            Back to menu
+          </button>
+        </Link>
+        <Link to='/cart'>
+          <button className='btn btn-danger float-right' style={{ marginRight: '10px' }}>
             Cancel
           </button>
         </Link>

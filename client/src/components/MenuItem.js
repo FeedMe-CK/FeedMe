@@ -8,19 +8,15 @@ export default class MenuItem extends React.Component {
     };
   }
 
-  handleInputChange = (event) =>
-    this.setState({ [event.target.name]: event.target.value });
+  handleInputChange = event => this.setState({ [event.target.name]: event.target.value });
 
   addToCart = () => {
-    let cart = localStorage.getItem("cart")
-      ? JSON.parse(localStorage.getItem("cart"))
-      : {};
+    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
     let id = this.props.menuItem.itemNo;
     cart[id] = cart[id] ? cart[id] : 0;
     let qty = cart[id] + parseInt(this.state.quantity);
     cart[id] = qty;
-    localStorage.setItem("cart", JSON.stringify(cart));
-    console.log(cart);
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   render() {

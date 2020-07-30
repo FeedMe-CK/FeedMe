@@ -11,7 +11,6 @@ export default class Login extends Component {
 
   handleChange = event => {
     const { name, value } = event.target;
-    console.log(value)
     this.setState({
       [name]: value,
     });
@@ -31,7 +30,7 @@ export default class Login extends Component {
         });
       } else {
         this.props.setUser(data);
-        this.props.history.push('/');
+        this.props.history.push('/menu');
       }
     });
   };

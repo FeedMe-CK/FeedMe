@@ -1,23 +1,22 @@
-import React from "react";
-import "./App.css";
-import { googleLogin as Google } from "./services/auth";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import { Route, Redirect } from "react-router-dom";
-import EmployeeLogin from "./components/employeeLogin";
-import Menu from "./components/Menu";
-import Cart from "./components/Cart";
-import OrdersView from "./components/OrdersView";
-import Checkout from "./components/Checkout";
-import { SearchLocationInput } from "./SearchLocationInput";
-import Navbar from "./components/Navbar";
-import SuccessPage from "./components/successpage";
+import React from 'react';
+import './App.css';
+import { googleLogin as Google } from './services/auth';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import { Route, Redirect } from 'react-router-dom';
+import Menu from './components/Menu';
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import { SearchLocationInput } from './SearchLocationInput';
+import Navbar from './components/Navbar';
+import SuccessPage from './components/successpage';
+import LandingPage from './components/LandingPage';
 
 export default class App extends React.Component {
   state = {
     user: this.props.user,
-    message: "",
-    order: "",
+    message: '',
+    order: '',
   };
 
   setUser = (user) => {

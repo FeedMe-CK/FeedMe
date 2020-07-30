@@ -88,7 +88,6 @@ passport.use(
       }
 
       if (!foundUser) {
-        console.log('I am here');
         next(null, false, { message: 'Incorrect credentials' });
         return;
       }
