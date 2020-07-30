@@ -1,44 +1,61 @@
-import React from 'react';
+import React from "react";
 
 export default class MenuItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      quantity: 1,
+    };
+  }
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			quantity: 1
-		}
-	}
+  handleInputChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
 
-	handleInputChange = event => this.setState({[event.target.name]: event.target.value})
+  addToCart = () => {
+    let cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : {};
+    let id = this.props.menuItem.itemNo;
+    cart[id] = cart[id] ? cart[id] : 0;
+    let qty = cart[id] + parseInt(this.state.quantity);
+    cart[id] = qty;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log(cart);
+  };
 
-	
+  render() {
+    const { menuItem } = this.props;
+    return (
+      <div className="card" style={{ marginBottom: "10px" }} key={menuItem._id}>
+        <div className="card-body">
+          <h4 className="card-title">{menuItem.name}</h4>
+          <p className="card-text">{menuItem.description}</p>
+          <h5 className="card-text">
+            <small>price: </small>€{menuItem.price}
+          </h5>
 
-	addToCart = () => {
-		let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-		let id = this.props.menuItem.itemNo;
-		cart[id] = (cart[id] ? cart[id]: 0);
-		let qty = cart[id] + parseInt(this.state.quantity);
-		cart[id] = qty
-		localStorage.setItem('cart', JSON.stringify(cart));
-		console.log(cart)
-	}
-
-	render(){
-		const { menuItem } = this.props;
-		console.log("I am from MenuItem",menuItem)
-		return (
-		    <div className="card" style={{ marginBottom: "10px"}} key = {menuItem._id}>
-			  <div className="card-body">
-			    <h4 className="card-title">{menuItem.name}</h4>
-			    <p className="card-text">{menuItem.description}</p>
-			    <h5 className="card-text"><small>price: </small>${menuItem.price}</h5>
-			    
-			    	<div>
-			    		<button className="btn btn-sm btn-warning float-right" onClick={this.addToCart}>Add to cart</button>
-			    		<input type="number" value={this.state.quantity} name="quantity" onChange={this.handleInputChange} className="float-right" style={{ width: "60px", marginRight: "10px", borderRadius: "3px"}}/>
-			    	</div> 
-			  </div>
-			</div>
-		)
-	}
+          <div>
+            <button
+              className="btn btn-sm btn-warning float-right"
+              onClick={this.addToCart}
+            >
+              Add to cart
+            </button>
+            <input
+              type="number"
+              value={this.state.quantity}
+              name="quantity"
+              onChange={this.handleInputChange}
+              className="float-right"
+              style={{
+                width: "60px",
+                marginRight: "10px",
+                borderRadius: "3px",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

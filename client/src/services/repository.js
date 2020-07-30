@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 const BASE_URL = "http://localhost:5555";
@@ -27,13 +26,13 @@ export function getProducts() {
   });
 }
 
-export function placeOrder(order, total, deliveryAddress, place_id) {
+export function placeOrder(order, total, deliveryAddress, placeId) {
   return axios
-    .post("/api/cart/order", { order, total, deliveryAddress, place_id })
+    .post("/api/cart/order", { order, total, deliveryAddress, placeId })
     .then((response) => {
       return response.data;
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 }
@@ -52,7 +51,6 @@ export function advanceState(id, status) {
     });
 }
 
-
 // export function placeOrder(cart){
 //     return axios
 //     .post('/api/order',{cart})
@@ -64,4 +62,3 @@ export function advanceState(id, status) {
 //       console.log(err);
 //     });
 // }
-

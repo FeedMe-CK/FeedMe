@@ -7,7 +7,7 @@ export default class OrdersView extends React.Component {
   state = {
     orders: [],
     user: this.props.user,
-    restaurantPrefix: "RIC",
+    restaurantPrefix: "TDA",
   };
 
   componentDidMount() {
@@ -15,6 +15,10 @@ export default class OrdersView extends React.Component {
       this.setState({ orders });
     });
   }
+
+  // componentDidUpdate() {
+
+  // }
 
   handleSubmit = (event, order) => {
     if (order.status === "placed") {
@@ -80,7 +84,6 @@ export default class OrdersView extends React.Component {
               <br />
               <h4>Order ID: {order.subOrderId}</h4>
               <h4>Order Status: {order.status}</h4>
-
               {/*<h4>Order Items: {order.items.join(" - ")}</h4>
               <h4>Subtotal: ${order.subTotal}</h4>
               <h4>

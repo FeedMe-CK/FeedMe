@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./App.css";
 import { googleLogin as Google } from "./services/auth";
@@ -21,15 +20,20 @@ export default class App extends React.Component {
     order: "",
   };
 
-  setUser = user => {
+  setUser = (user) => {
     this.setState({
       user: user,
     });
   };
 
+  setOrder = (order) => {
+    this.setState({ order: order });
+    console.log(this.state.order);
+  };
+
   render = () => {
     return (
-      <div className='App'>
+      <div className="App">
         <Navbar user={this.state.user} setUser={this.setUser} />
         <Route
           exact
@@ -65,7 +69,14 @@ export default class App extends React.Component {
           exact
           path="/checkout"
           render={(props) => (
-            <Checkout
+            <Checkout user={this.state.user} order={this.setOrder} {...props} />
+          )}
+        />
+        <Route
+          exact
+          path="/success"
+          render={(props) => (
+            <SuccessPage
               user={this.state.user}
               order={this.state.order}
               {...props}
@@ -74,10 +85,15 @@ export default class App extends React.Component {
         />
         <Route
           exact
-          path="/success"
-          render={(props) => <SuccessPage user={this.state.user} {...props} />}
+          path="/employee/orders"
+          render={(props) => (
+            <OrdersView
+              setUser={this.setUser}
+              user={this.state.user}
+              {...props}
+            />
+          )}
         />
-        <Route exact path='/employee/orders' render={props => <OrdersView setUser={this.setUser} user={this.state.user} {...props} />} />
       </div>
     );
   };

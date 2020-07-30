@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { withScriptjs } from "react-google-maps";
 import Map from "./Map";
 
-const MapViewer = () => {
-  const MapLoader = withScriptjs(Map);
+const MapViewer = (props) => {
+  console.log();
+  const MapLoader = withScriptjs((props) => (
+    <Map order={props.order} {...props} />
+  ));
 
   return (
     <MapLoader

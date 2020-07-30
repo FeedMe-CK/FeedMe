@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background-image: url(./Background.jpg);
+  background-position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App-logo {
@@ -11,6 +15,10 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.body {
+  background-image: url(./Background.jpg);
 }
 
 .App-header {
