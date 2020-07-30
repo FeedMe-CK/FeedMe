@@ -26,13 +26,17 @@ export default class MenuItem extends React.Component {
   render() {
     const { menuItem } = this.props;
     return (
-      <div className="card" style={{ marginBottom: "10px" }} key={menuItem._id}>
+      <div
+        className="card"
+        style={{ marginBottom: "10px", borderRadius: `1.25rem` }}
+        key={menuItem._id}
+      >
         <div className="card-body">
           <h4 className="card-title">{menuItem.name}</h4>
-          <p className="card-text">{menuItem.description}</p>
-          <h5 className="card-text">
+          <h6 className="card-text">{menuItem.description}</h6>
+          <h6 className="card-text">
             <small>price: </small>€{menuItem.price}
-          </h5>
+          </h6>
 
           <div>
             <button

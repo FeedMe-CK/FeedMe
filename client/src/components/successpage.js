@@ -21,6 +21,7 @@ export default class successpage extends Component {
           {this.state.order.orderId}!!
         </h1>
         <h2>The order will be delivered in approximately {time} mins 😊</h2>
+        <h2>Guten Appetit</h2>
       </div>
     );
   }

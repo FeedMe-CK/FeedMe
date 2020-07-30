@@ -1,9 +1,7 @@
 .App {
   text-align: center;
-  background-image: url(./Background.jpg);
-  background-position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
+  font-family: "Amiri", serif;
+  /* font-family: "Patrick Hand", cursive; */
 }
 
 .App-logo {

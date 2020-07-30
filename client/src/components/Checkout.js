@@ -66,7 +66,7 @@ export default class Checkout extends React.Component {
               {menuItem.name}
               <small> (quantity: {menuItem.qty})</small>
               <span className="float-right text-primary">
-                ${menuItem.qty * menuItem.price}
+                €{menuItem.qty * menuItem.price}
               </span>
             </p>
             <hr />
@@ -77,7 +77,7 @@ export default class Checkout extends React.Component {
           <div>
             <h4>
               <small>Total Amount:</small>
-              <span className="float-right text-primary">${total}</span>
+              <span className="float-right text-primary">€{total}</span>
             </h4>
             <hr />
           </div>
