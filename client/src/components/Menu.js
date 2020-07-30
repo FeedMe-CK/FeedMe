@@ -1,7 +1,7 @@
-import React from 'react';
-import MenuItem from './MenuItem';
-import { getProducts } from '../services/repository';
-import { Link } from 'react-router-dom';
+import React from "react";
+import MenuItem from "./MenuItem";
+import { getProducts } from "../services/repository";
+import { Link } from "react-router-dom";
 
 export default class Menu extends React.Component {
   constructor(props) {

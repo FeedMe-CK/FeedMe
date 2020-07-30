@@ -1,25 +1,26 @@
+
 const express = require('express');
 const app = require('../app');
 const router = express.Router();
-const Order = require('../models/Order');
-const MenuItem = require('../models/MenuItem');
-const SubOrder = require('../models/SubOrder');
-const User = require('../models/Customer');
+const Order = require("../models/Order");
+const MenuItem = require("../models/MenuItem");
+const SubOrder = require("../models/SubOrder");
+const User = require("../models/Customer");
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   let menu = [];
   let cart = JSON.parse(req.body.cart);
   if (!cart) return res.json(menu);
   MenuItem.find({ itemNo: { $in: Object.keys(cart) } })
-    .then(data => {
+    .then((data) => {
       return res.json(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
 
-router.post('/order', (req, res) => {
+router.post("/order", (req, res) => {
   let items = req.body.order;
   const newItems = items.reduce((a, v) => {
     if (a[v.restaurantPrefix]) {
@@ -31,14 +32,19 @@ router.post('/order', (req, res) => {
   }, {});
   let id = new Date().getTime();
 
-  const orderId = 'ON' + id;
+  const orderId = "ON" + id;
   const Customer = req.user._id;
   const totPrice = req.body.total;
+  const deliveryAddress = req.body.deliveryAddress;
+  const place_id = req.body.placeId;
+  console.log("I am from the order route", req.body);
 
   Order.create({
     orderId,
     Customer,
     totPrice,
+    deliveryAddress,
+    place_id,
   })
     .then(newOrder => {
       res.json(newOrder);
@@ -51,9 +57,12 @@ router.post('/order', (req, res) => {
         .catch(err => console.log(err));
       for (let restaurant in newItems) {
         const subOrderId = restaurant + id;
-        const subTotal = newItems[restaurant].reduce((a, v) => a + v.price * v.qty, 0);
+        const subTotal = newItems[restaurant].reduce(
+          (a, v) => a + v.price * v.qty,
+          0
+        );
         let items = [];
-        newItems[restaurant].map(item => {
+        newItems[restaurant].map((item) => {
           for (let i = 0; i < item.qty; i++) {
             items.push(item._id);
           }
@@ -72,19 +81,19 @@ router.post('/order', (req, res) => {
           items,
           restaurantPrefix: restaurant,
         })
-          .then(subOrder => {
+          .then((subOrder) => {
             let subOrderId = subOrder._id;
             Order.findByIdAndUpdate(mainId, {
               $push: { subOrders: subOrderId },
             }).then(test => console.log());
           })
-          .then(MainOrder => {})
-          .catch(err => {
+          .then((MainOrder) => {})
+          .catch((err) => {
             console.log(err);
           });
       }
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

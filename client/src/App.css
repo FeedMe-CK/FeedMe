@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-family: "Amiri", serif;
+  /* font-family: "Patrick Hand", cursive; */
 }
 
 .App-logo {
@@ -11,6 +13,10 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.body {
+  background-image: url(./Background.jpg);
 }
 
 .App-header {

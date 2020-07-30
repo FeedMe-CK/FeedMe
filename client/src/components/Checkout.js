@@ -10,20 +10,30 @@ export default class Checkout extends React.Component {
     this.state = {
       menu: [],
       total: 0,
-      deliveryAddress: this.props.address,
-      address: this.props.user.address,
+      deliveryAddress: this.props.user.address,
+      placeId: this.props.user.placeId,
     };
   }
+
+  updateAddress = (deliveryAddress, placeId) => {
+    console.log("Got here!");
+    this.setState({ deliveryAddress, placeId });
+  };
 
   checkout() {
     let order = this.state.menu;
     let total = this.state.total;
     let deliveryAddress = this.state.deliveryAddress;
-    let place_id = this.state.place_id;
+    let place_id = this.state.placeId;
     placeOrder(order, total, deliveryAddress, place_id)
-      .then(response => {
-        this.props.history.push('/success');
-        localStorage.removeItem('cart');
+      .then((response) => {
+        console.log("I am the order placed", response);
+        let place_id = response.place_id;
+        console.log(place_id);
+        localStorage.setItem("placeId", place_id);
+        this.props.order(response);
+        this.props.history.push("/success");
+        localStorage.removeItem("cart");
       })
       .catch(err => console.log(err));
   }
@@ -48,7 +58,7 @@ export default class Checkout extends React.Component {
   }
 
   render() {
-    if (!this.props.user) return <Redirect to='/login' />;
+    if (!this.props.user) return <Redirect to="/login" />;
     const { menu, total } = this.state;
     return (
       <div className=' container'>
@@ -59,7 +69,9 @@ export default class Checkout extends React.Component {
             <p>
               {menuItem.name}
               <small> (quantity: {menuItem.qty})</small>
-              <span className='float-right text-primary'>${menuItem.qty * menuItem.price}</span>
+              <span className="float-right text-primary">
+                €{menuItem.qty * menuItem.price}
+              </span>
             </p>
             <hr />
           </div>
@@ -69,7 +81,7 @@ export default class Checkout extends React.Component {
           <div>
             <h4>
               <small>Total Amount:</small>
-              <span className='float-right text-primary'>${total}</span>
+              <span className="float-right text-primary">€{total}</span>
             </h4>
             <hr />
           </div>

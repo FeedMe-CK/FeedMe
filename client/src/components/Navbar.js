@@ -29,7 +29,8 @@ export default function Navbar(props) {
             <Link to='/login'>Login</Link>
           </Nav.Brand>
         </>
-      )}
+      )
+      }
     </Nav>
   );
 }

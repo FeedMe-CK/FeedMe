@@ -55,7 +55,7 @@ export default class Cart extends React.Component {
           <div>
             <h4>
               <small>Total Amount:</small>
-              <span className='float-right text-primary'>${total}</span>
+              <span className="float-right text-primary">€{total}</span>
             </h4>
             <hr />
           </div>

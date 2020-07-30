@@ -16,6 +16,10 @@ export default class OrdersView extends React.Component {
     });
   }
 
+  // componentDidUpdate() {
+
+  // }
+
   handleSubmit = (event, order) => {
     if (order.status === 'placed') {
       advanceState(order._id, 'inPreparation');

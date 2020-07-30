@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class MenuItem extends React.Component {
   constructor(props) {
@@ -22,25 +22,36 @@ export default class MenuItem extends React.Component {
   render() {
     const { menuItem } = this.props;
     return (
-      <div className='card' style={{ marginBottom: '10px' }} key={menuItem._id}>
-        <div className='card-body'>
-          <h4 className='card-title'>{menuItem.name}</h4>
-          <p className='card-text'>{menuItem.description}</p>
-          <h5 className='card-text'>
-            <small>price: </small>${menuItem.price}
-          </h5>
+      <div
+        className="card"
+        style={{ marginBottom: "10px", borderRadius: `1.25rem` }}
+        key={menuItem._id}
+      >
+        <div className="card-body">
+          <h4 className="card-title">{menuItem.name}</h4>
+          <h6 className="card-text">{menuItem.description}</h6>
+          <h6 className="card-text">
+            <small>price: </small>€{menuItem.price}
+          </h6>
 
           <div>
-            <button className='btn btn-sm btn-warning float-right' onClick={this.addToCart}>
+            <button
+              className="btn btn-sm btn-warning float-right"
+              onClick={this.addToCart}
+            >
               Add to cart
             </button>
             <input
-              type='number'
+              type="number"
               value={this.state.quantity}
-              name='quantity'
+              name="quantity"
               onChange={this.handleInputChange}
-              className='float-right'
-              style={{ width: '60px', marginRight: '10px', borderRadius: '3px' }}
+              className="float-right"
+              style={{
+                width: "60px",
+                marginRight: "10px",
+                borderRadius: "3px",
+              }}
             />
           </div>
         </div>

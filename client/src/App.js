@@ -19,23 +19,80 @@ export default class App extends React.Component {
     order: '',
   };
 
-  setUser = user => {
+  setUser = (user) => {
     this.setState({
       user: user,
     });
   };
 
+  setOrder = (order) => {
+    this.setState({ order: order });
+    console.log(this.state.order);
+  };
+
   render = () => {
     return (
-      <div className='App'>
+      <div className="App">
         <Navbar user={this.state.user} setUser={this.setUser} />
-        <Route exact path='/' render={props => <LandingPage setUser={this.setUser} user={this.state.user} {...props} />} />
-        <Route exact path='/signup' render={props => <Signup setUser={this.setUser} {...props} />} />
-        <Route exact path='/login' render={props => <Login setUser={this.setUser} {...props} />} />
-        <Route exact path='/menu' component={Menu} />
-        <Route exact path='/cart' component={Cart} />
-        <Route exact path='/checkout' render={props => <Checkout user={this.state.user} order={this.state.order} {...props} />} />
-        <Route exact path='/success' render={props => <SuccessPage user={this.state.user} {...props} />} />
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <OrdersView
+              setUser={this.setUser}
+              user={this.state.user}
+              {...props}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/signup"
+          render={(props) => <Signup setUser={this.setUser} {...props} />}
+        />
+        <Route
+          exact
+          path="/login"
+          render={(props) => <Login setUser={this.setUser} {...props} />}
+        />
+        <Route
+          exact
+          path="/employee/login"
+          render={(props) => (
+            <EmployeeLogin setUser={this.setUser} {...props} />
+          )}
+        />
+        <Route exact path="/menu" component={Menu} />
+        <Route exact path="/cart" component={Cart} />
+        <Route
+          exact
+          path="/checkout"
+          render={(props) => (
+            <Checkout user={this.state.user} order={this.setOrder} {...props} />
+          )}
+        />
+        <Route
+          exact
+          path="/success"
+          render={(props) => (
+            <SuccessPage
+              user={this.state.user}
+              order={this.state.order}
+              {...props}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/employee/orders"
+          render={(props) => (
+            <OrdersView
+              setUser={this.setUser}
+              user={this.state.user}
+              {...props}
+            />
+          )}
+        />
       </div>
     );
   };
